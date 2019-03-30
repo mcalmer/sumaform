@@ -395,6 +395,10 @@ disable_apt_daily_upgrade_service:
 disable_apt_daily_wait:
   cmd.run:
     - name: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+
+apt_force_ipv4:
+  cmd.run:
+    - name: echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99disable-ipv6
 {% endif %}
 
 {% if grains['additional_repos'] %}
